@@ -1,7 +1,6 @@
 # Terraform AWS VPC Setup
 This Terraform module creates an AWS Virtual Private Cloud (VPC) with associated subnets, network ACLs, route tables, and an internet gateway. It's designed to set up a basic network environment for your application.
 
-
 ## Usage
 
 ```hcl
