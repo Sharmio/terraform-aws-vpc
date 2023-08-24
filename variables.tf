@@ -14,7 +14,6 @@ variable "cidr_block" {
 variable "project" {
   type        = string
   description = "Your project name or identifier"
-  default     = "terraform"
 }
 
 variable "branch" {
