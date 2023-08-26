@@ -49,7 +49,7 @@ resource "aws_subnet" "private_subnets" {
 
   tags = merge(var.common_resource_tags,
     {
-      Name = "private_subnet_${count.index + 1}_${element(var.availability_zones, count.index)}_${element(var.private_subnet_cidrs, count.index)}"
+      Name = "${var.company}_private_subnet_${count.index + 1}_${element(var.availability_zones, count.index)}_${element(var.private_subnet_cidrs, count.index)}"
     }
   )
 }
@@ -64,7 +64,7 @@ resource "aws_subnet" "public_subnets" {
 
   tags = merge(var.common_resource_tags,
     {
-      Name = "public_subnet_${count.index + 1}_${element(var.availability_zones, count.index + 2)}_${element(var.public_subnet_cidrs, count.index)}"
+      Name = "${var.company}_public_subnet_${count.index + 1}_${element(var.availability_zones, count.index + 2)}_${element(var.public_subnet_cidrs, count.index)}"
     }
   )
 }
@@ -74,7 +74,7 @@ resource "aws_internet_gateway" "igw" {
 
   tags = merge(var.common_resource_tags,
     {
-      Name = "igw_${var.project}"
+      Name = "${var.company}_igw_${var.project}"
     }
   )
   timeouts {
@@ -88,7 +88,7 @@ resource "aws_default_route_table" "default_rt" {
 
   tags = merge(var.common_resource_tags,
     {
-      Name = "main_private_rt"
+      Name = "${var.company}_main_private_rt_${var.project}"
     }
   )
 }
@@ -101,7 +101,7 @@ resource "aws_route_table" "custom_rt" {
   }
   tags = merge(var.common_resource_tags,
     {
-      Name = "custom_public-rt"
+      Name = "${var.company}_custom_public-rt_${var.project}"
     }
   )
 }
