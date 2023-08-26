@@ -7,7 +7,7 @@ resource "aws_vpc" "vpc_poc" {
   enable_network_address_usage_metrics = var.enable_network_address_usage_metrics
   tags                                 = merge (var.common_resource_tags, 
     {
-    Name = "vpc_${var.project}"
+    Name = "${var.company}_vpc_${var.project}"
     } 
   )
 }
@@ -32,7 +32,10 @@ resource "aws_default_network_acl" "default" {
     to_port    = 0
   }
 
-  tags = var.common_resource_tags
+  tags = merge (var.common_resource_tags,
+  {
+    Name = "${var.company}_vpc_${var.project}"
+  }
 }
 
 
