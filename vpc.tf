@@ -7,7 +7,7 @@ resource "aws_vpc" "vpc_poc" {
   enable_network_address_usage_metrics = var.enable_network_address_usage_metrics
   tags                                 = merge (var.common_resource_tags, 
     {
-    Name = "sharmio_vpc_poc_${var.project}"
+    Name = "vpc_${var.project}"
     } 
   )
 }
@@ -45,7 +45,7 @@ resource "aws_subnet" "private_subnets" {
 
   tags = merge(var.common_resource_tags,
     {
-      Name = "sharmio_private_subnet_${count.index + 1}_${element(var.availability_zones, count.index)}_${element(var.private_subnet_cidrs, count.index)}"
+      Name = "private_subnet_${count.index + 1}_${element(var.availability_zones, count.index)}_${element(var.private_subnet_cidrs, count.index)}"
     }
   )
 }
@@ -60,7 +60,7 @@ resource "aws_subnet" "public_subnets" {
 
   tags = merge(var.common_resource_tags,
     {
-      Name = "sharmio_public_subnet_${count.index + 1}_${element(var.availability_zones, count.index + 2)}_${element(var.public_subnet_cidrs, count.index)}"
+      Name = "public_subnet_${count.index + 1}_${element(var.availability_zones, count.index + 2)}_${element(var.public_subnet_cidrs, count.index)}"
     }
   )
 }
@@ -70,7 +70,7 @@ resource "aws_internet_gateway" "igw" {
 
   tags = merge(var.common_resource_tags,
     {
-      Name = "sharmio_igw"
+      Name = "igw_${var.project}"
     }
   )
   timeouts {
@@ -84,7 +84,7 @@ resource "aws_default_route_table" "default_rt" {
 
   tags = merge(var.common_resource_tags,
     {
-      Name = "sharmio_main_private_rt"
+      Name = "main_private_rt"
     }
   )
 }
@@ -97,7 +97,7 @@ resource "aws_route_table" "custom_rt" {
   }
   tags = merge(var.common_resource_tags,
     {
-      Name = "sharmio_custom_public-rt"
+      Name = "custom_public-rt"
     }
   )
 }
