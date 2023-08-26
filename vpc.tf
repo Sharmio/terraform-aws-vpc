@@ -36,6 +36,7 @@ resource "aws_default_network_acl" "default" {
   {
     Name = "${var.company}_vpc_${var.project}"
   }
+  )
 }
 
 
