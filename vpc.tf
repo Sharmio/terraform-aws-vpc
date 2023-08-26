@@ -7,7 +7,7 @@ resource "aws_vpc" "vpc_poc" {
   enable_network_address_usage_metrics = var.enable_network_address_usage_metrics
   tags                                 = merge (var.common_resource_tags, 
     {
-    Name = "vpc_poc_${var.project}"
+    Name = "sharmio_vpc_poc_${var.project}"
     } 
   )
 }
