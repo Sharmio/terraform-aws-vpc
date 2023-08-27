@@ -34,7 +34,7 @@ resource "aws_default_network_acl" "default" {
 
   tags = merge(var.common_resource_tags,
     {
-      Name = "${var.company}_vpc_${var.project}"
+      Name = "${var.company}_vpc_default_network_acl_${var.project}"
     }
   )
 }
@@ -101,7 +101,7 @@ resource "aws_route_table" "custom_rt" {
   }
   tags = merge(var.common_resource_tags,
     {
-      Name = "${var.company}_custom_public-rt_${var.project}"
+      Name = "${var.company}_custom_public_rt_${var.project}"
     }
   )
 }
