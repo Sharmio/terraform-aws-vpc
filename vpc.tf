@@ -5,10 +5,10 @@ resource "aws_vpc" "vpc_poc" {
   enable_dns_support                   = var.enable_dns_support
   enable_dns_hostnames                 = var.enable_dns_hostnames
   enable_network_address_usage_metrics = var.enable_network_address_usage_metrics
-  tags                                 = merge (var.common_resource_tags, 
+  tags = merge(var.common_resource_tags,
     {
-    Name = "${var.company}_vpc_${var.project}"
-    } 
+      Name = "${var.company}_vpc_${var.project}"
+    }
   )
 }
 
@@ -16,7 +16,7 @@ resource "aws_default_network_acl" "default" {
   default_network_acl_id = aws_vpc.vpc_poc.default_network_acl_id
   ingress {
     protocol   = -1
-    rule_no    = 101
+    rule_no    = 100
     action     = "allow"
     cidr_block = "0.0.0.0/0"
     from_port  = 0
@@ -32,10 +32,10 @@ resource "aws_default_network_acl" "default" {
     to_port    = 0
   }
 
-  tags = merge (var.common_resource_tags,
-  {
-    Name = "${var.company}_vpc_${var.project}"
-  }
+  tags = merge(var.common_resource_tags,
+    {
+      Name = "${var.company}_vpc_${var.project}"
+    }
   )
 }
 
@@ -92,7 +92,7 @@ resource "aws_default_route_table" "default_rt" {
     }
   )
 }
- 
+
 resource "aws_route_table" "custom_rt" {
   vpc_id = aws_vpc.vpc_poc.id
   route {
@@ -107,7 +107,7 @@ resource "aws_route_table" "custom_rt" {
 }
 
 resource "aws_route_table_association" "public_subnet_asso" {
- count = length(var.public_subnet_cidrs)
- subnet_id      = element(aws_subnet.public_subnets[*].id, count.index)
- route_table_id = aws_route_table.custom_rt.id
+  count          = length(var.public_subnet_cidrs)
+  subnet_id      = element(aws_subnet.public_subnets[*].id, count.index)
+  route_table_id = aws_route_table.custom_rt.id
 }

@@ -16,6 +16,11 @@ variable "project" {
   description = "Your project name or identifier"
 }
 
+variable "company" {
+  type        = string
+  description = "Your company name or identifier"
+}
+
 variable "branch" {
   type        = string
   description = "(optional) describe your variable"
